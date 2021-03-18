@@ -31,8 +31,7 @@ Location_Address varchar(200) NOT_NULL
 RECEIPT_TBL
 Receipt_Id   unsigned int autoincrment PK
 Receipt_Type (ER, DR) NOT_NULL
-Receipt_Date_TIME DateTime     NOT_NULL
-Receipt_Id_F
+Receipt_Date_Time DateTime     NOT_NULL
 Customer_Id         NOT_NULL          FK
 Vehicle_No    varchar(30)    NOT_NULL
 Delivery_Person_Name varchar(30) NOT_NULL
@@ -43,7 +42,7 @@ STOCK_TBL
 Customer_Id   FK notnull
 Cylinder_Id   FK notnull
 Cylinder_Stock  NOT_NULL
-PK(Customer_Id + Cylinder_Id)
+PK(Customer_Id + Cylinder_Id)           //lock the specific row before entry
 
 USER_TBL
 User_Name  varchar(50) PK
@@ -52,3 +51,65 @@ Password   varchar(50) Not NULL
 CONFIG
 KEY    varchar(50) PK
 VALUE  varchar(50) NOT NULL 
+==========================================================================
+Classes
+
+GasFamily
+gasFamilyId    int autoincrement PK
+gasFamilyName  string   NOT_NULL
+
+Gas
+gasId    String   PK
+gasName    String      Unique NOT_NULL
+gasFamily  GasFamily   NOT_NULL
+
+Cylinder
+cylinderId   int autoincrement PK
+gas          Gas        NOT_NULL          FK
+cylinderCapacity  float(10,2)   NOT_NULL
+cylinderUnit      (kg, lit)     NOT_NULL
+
+Customer
+customerId   int autoincrement PK
+customerName  vharchar(30)     NOT_NULL
+customerAddress varchar(200)   NOT_NULL
+customerPinCode  varchar(7)    NOT_NULL
+contactName1    varchar(30)   NOT_NULL
+contactName2    varchar(30)   NULL
+contactNumber1  varchar(10)   NOT_NULL
+contactNumber2  varchar(10)   NULL
+
+Location
+locationId  int autoincrement PK
+locationName varchar(30)   NOT_NULL
+locationAddress varchar(200) NOT_NULL
+
+Receipt
+receiptId              unsigned int autoincrment PK
+receiptType            (ER, DR)     NOT_NULL
+receiptDateTime        DateTime     NOT_NULL
+customer               Customer     NOT_NULL          FK
+vehicleNo              varchar(30)  NOT_NULL
+deliveryPersonName     varchar(30)  NOT_NULL
+deliveryPersonContact  varchar(10)  NULL
+receiptCylinders       varchar(500) NOT_NULL
+
+Stock
+customer Customer   FK notnull
+cylinder Cylinder   FK notnull
+cylinderStock  NOT_NULL
+PK(Customer_Id + Cylinder_Id)           //lock the specific row before entry
+
+User
+userName  varchar(50) PK
+password   varchar(50) Not NULL
+
+Config
+key    varchar(50) PK
+value  varchar(50) NOT NULL 
+
+
+
+
+
+
