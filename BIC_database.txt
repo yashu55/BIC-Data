@@ -1,0 +1,54 @@
+GAS_FAMILY_TBL
+Gas_Family_Id    int autoincrement PK
+Gas_Family_Name  varchar(30)   NOT_NULL
+
+GAS_TBL
+Gas_Id    varchar(10)   PK
+Gas_Name    varchar(30)      Unique NOT_NULL
+Gas_Family_Id             FK  NOT_NULL
+
+CYLINDER_TBL
+Cylinder_Id   int autoincrement PK
+Gas_Id        NOT_NULL          FK
+Cylinder_Capacity  float(10,2)   NOT_NULL
+Cylinder_Unit      (kg, lit)     NOT_NULL
+
+CUSTOMER_TBL
+Customer_Id   int autoincrement PK
+Customer_Name  vharchar(30)     NOT_NULL
+Customer_Address varchar(200)   NOT_NULL
+Customer_PinCode  varchar(7)    NOT_NULL
+Contact_Name_1    varchar(30)   NOT_NULL
+Contact_Name_2    varchar(30)   NULL
+Contact_Number_1  varchar(10)   NOT_NULL
+Contact_Number_2  varchar(10)   NULL
+
+LOCATION_TBL
+Location_Id  int autoincrement PK
+Location_Name varchar(30)   NOT_NULL
+Location_Address varchar(200) NOT_NULL
+
+RECEIPT_TBL
+Receipt_Id   unsigned int autoincrment PK
+Receipt_Type (ER, DR) NOT_NULL
+Receipt_Date_TIME DateTime     NOT_NULL
+Receipt_Id_F
+Customer_Id         NOT_NULL          FK
+Vehicle_No    varchar(30)    NOT_NULL
+Delivery_Person_Name varchar(30) NOT_NULL
+Delivery_Person_Contact varchar(10)  NULL
+Receipt_Cylinders   varchar(500)  NOT_NULL
+
+STOCK_TBL
+Customer_Id   FK notnull
+Cylinder_Id   FK notnull
+Cylinder_Stock  NOT_NULL
+PK(Customer_Id + Cylinder_Id)
+
+USER_TBL
+User_Name  varchar(50) PK
+Password   varchar(50) Not NULL
+
+CONFIG
+KEY    varchar(50) PK
+VALUE  varchar(50) NOT NULL 
