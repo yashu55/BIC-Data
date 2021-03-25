@@ -36,7 +36,7 @@ Customer_Id         NOT_NULL          FK
 Vehicle_No    varchar(30)    NOT_NULL
 Delivery_Person_Name varchar(30) NOT_NULL
 Delivery_Person_Contact varchar(10)  NULL
-Receipt_Cylinders   varchar(500)  NOT_NULL
+All_Cylinders   varchar(500)  NOT_NULL
 
 STOCK_TBL
 Customer_Id   FK notnull
@@ -54,22 +54,22 @@ VALUE  varchar(50) NOT NULL
 ==========================================================================
 Classes
 
-GasFamily
+GasFamily                                                    //DAO
 gasFamilyId    int autoincrement PK
 gasFamilyName  string   NOT_NULL
 
-Gas
-gasId    String   PK
+Gas                                                          //DAO
+gasId    String   PK                                   
 gasName    String      Unique NOT_NULL
 gasFamily  GasFamily   NOT_NULL
 
-Cylinder
+Cylinder                                                    //DAO
 cylinderId   int autoincrement PK
 gas          Gas        NOT_NULL          FK
 cylinderCapacity  float(10,2)   NOT_NULL
 cylinderUnit      (kg, lit)     NOT_NULL
 
-Customer
+Customer                                                Add    update(active inactive) Show   // APIs  //list of customers
 customerId   int autoincrement PK
 customerName  vharchar(30)     NOT_NULL
 customerAddress varchar(200)   NOT_NULL
@@ -78,13 +78,14 @@ contactName1    varchar(30)   NOT_NULL
 contactName2    varchar(30)   NULL
 contactNumber1  varchar(10)   NOT_NULL
 contactNumber2  varchar(10)   NULL
+active          boolean       NOT_NULL
 
-Location
+Location                                                   //DAO                                          
 locationId  int autoincrement PK
 locationName varchar(30)   NOT_NULL
 locationAddress varchar(200) NOT_NULL
 
-Receipt
+Receipt                                                    // DAO       Add   Modify  //APIS
 receiptId              unsigned int autoincrment PK
 receiptType            (ER, DR)     NOT_NULL
 receiptDateTime        DateTime     NOT_NULL
@@ -100,16 +101,22 @@ cylinder Cylinder   FK notnull
 cylinderStock  NOT_NULL
 PK(Customer_Id + Cylinder_Id)           //lock the specific row before entry
 
-User
+User                                             
 userName  varchar(50) PK
 password   varchar(50) Not NULL
+role       varchar(10) NOT_NULL
 
 Config
-key    varchar(50) PK
-value  varchar(50) NOT NULL 
+key    varchar(50) PK                  
+value  varchar(50) NOT NULL          
 
 
 
+login
+
+Empty Receipt
+Create New -
+Show All   search - desc date ()                 // get change  - change should be less than stock
 
 
-
+all positive stock list
